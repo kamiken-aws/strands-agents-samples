@@ -6,11 +6,11 @@
   </div>
 
   <h1>
-    Strands Agents Samples
+    Strands Agents サンプル
   </h1>
 
   <h2>
-    A model-driven approach to building AI agents in just a few lines of code.
+    わずか数行のコードでAIエージェントを構築する、モデル駆動型のアプローチ
   </h2>
 
   <div align="center">
@@ -21,23 +21,23 @@
   </div>
   
   <p>
-    <a href="https://strandsagents.com/">Documentation</a>
-    ◆ <a href="https://github.com/strands-agents/samples">Samples</a>
+    <a href="https://strandsagents.com/">ドキュメント</a>
+    ◆ <a href="https://github.com/strands-agents/samples">サンプル</a>
     ◆ <a href="https://github.com/strands-agents/sdk-python">Python SDK</a>
     ◆ <a href="https://github.com/strands-agents/sdk-typescript">TypeScript SDK</a> <img src="https://img.shields.io/badge/NEW-brightgreen" alt="New"/>
-    ◆ <a href="https://github.com/strands-agents/tools">Tools</a>
+    ◆ <a href="https://github.com/strands-agents/tools">ツール</a>
     ◆ <a href="https://github.com/strands-agents/agent-builder">Agent Builder</a>
-    ◆ <a href="https://github.com/strands-agents/mcp-server">MCP Server</a>
+    ◆ <a href="https://github.com/strands-agents/mcp-server">MCP サーバー</a>
   </p>
 </div>
 
-Welcome to the Strands Agents Samples repository!
+Strands Agents サンプルリポジトリへようこそ！
 
-Explore easy-to-use examples to get started with <a href="https://strandsagents.com">Strands Agents</a>.
+<a href="https://strandsagents.com">Strands Agents</a> を始めるための、使いやすいサンプル集をご覧ください。
 
-The examples in this repository are for **demonstration and educational purposes** only. They demonstrate concepts and techniques but are **not intended for direct use in production**. Always apply proper **security** and **testing** procedures before using in production environments.
+このリポジトリに含まれる例は、**デモンストレーションおよび教育目的**のみを意図しています。これらは概念や技術を示すものであり、**本番環境での直接的な使用を意図したものではありません**。本番環境で使用する前に、必ず適切な**セキュリティ**および**テスト**手順を適用してください。
 
-## Quick Start
+## クイックスタート
 
 <table>
 <tr>
@@ -45,40 +45,40 @@ The examples in this repository are for **demonstration and educational purposes
 
 ### <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="24" height="24" alt="Python"/> Python
 
-**Prerequisites:**
-- Python 3.10 or higher
-- pip package manager
-  - Verify with: `pip --version` or `pip3 --version`
-  - Usually comes bundled with Python 3.4+ installers from python.org
-  - If pip is missing, install using one of these methods:
-    ```bash
-    # Method 1 - Use Python's built-in module
+**前提条件:**
+- Python 3.10 以上
+- pip パッケージマネージャー
+  - 確認コマンド: `pip --version` または `pip3 --version`
+  - 通常、python.org の Python 3.4+ インストーラーに同梱されています
+  - pip がない場合、以下のいずれかの方法でインストールしてください:
+    ```
+    # 方法 1 - Python の組み込みモジュールを使用
     python -m ensurepip --upgrade
 
-    # Method 2 - Download and run the official installer
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    # 方法 2 - 公式インストーラーをダウンロードして実行
+    curl [https://bootstrap.pypa.io/get-pip.py](https://bootstrap.pypa.io/get-pip.py) -o get-pip.py
     python get-pip.py
     ```
 
-**Step 1: Create Virtual Environment**
-```bash
-# Create virtual environment
+**ステップ 1: 仮想環境の作成**
+```
+# 仮想環境を作成
 python -m venv venv
 
-# Activate virtual environment
-# On macOS/Linux:
+# 仮想環境をアクティベート
+# macOS/Linux の場合:
 source venv/bin/activate
-# On Windows:
+# Windows の場合:
 venv\Scripts\activate
 ```
 
-**Step 2: Install**
-```bash
+**ステップ 2: インストール**
+```
 pip install strands-agents strands-agents-tools
 ```
 
-**Your First Agent:**
-```python
+**最初のエージェント:**
+```
 from strands import Agent
 
 agent = Agent()
@@ -86,24 +86,24 @@ response = agent("Hello! Tell me a joke.")
 print(response)
 ```
 
-[Explore Python tutorials →](./01-tutorials/)
+[Python チュートリアルを見る →](./01-tutorials/)
 
 </td>
 <td width="60%" valign="top">
 
 ### <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="24" height="24" alt="TypeScript"/> TypeScript
 
-**Prerequisites:**
-- Node.js 18 or higher
-- npm or yarn package manager
+**前提条件:**
+- Node.js 18 以上
+- npm または yarn パッケージマネージャー
 
-**Install:**
-```bash
+**インストール:**
+```
 npm install @strands-agents/sdk
 ```
 
-**Your First Agent:**
-```typescript
+**最初のエージェント:**
+```
 import { Agent } from "@strands-agents/sdk";
 
 async function main() {
@@ -118,44 +118,45 @@ async function main() {
 main();
 ```
 
-[Explore TypeScript tutorials →](./typescript/01-tutorials/)
+[TypeScript チュートリアルを見る →](./typescript/01-tutorials/)
 
 </td>
 </tr>
 </table>
 
-### Model Provider Setup
+### モデルプロバイダーの設定
 
-Follow the instructions [here](https://strandsagents.com/latest/user-guide/quickstart/#model-providers) to configure your model provider and model access.
+モデルプロバイダーとモデルアクセスの設定については、[こちら](https://strandsagents.com/latest/user-guide/quickstart/#model-providers) の手順に従ってください。
 
-## Explore the Repository
+## リポジトリの探索
 
-### <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="20" height="20"/> Python Samples
+### <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="20" height="20"/> Python サンプル
 
-- **[01-tutorials](./01-tutorials/)** - Jupyter notebook tutorials covering fundamentals, multi-agent systems, and deployment
-- **[02-samples](./02-samples/)** - Real-world use cases and industry-specific examples
-- **[03-integrations](./03-integrations/)** - Integration examples with AWS services and third-party tools
-- **[04-UX-demos](./04-UX-demos/)** - Full-stack applications with user interfaces
-- **[05-agentic-rag](./05-agentic-rag/)** - Advanced Agentic RAG patterns
-- **[06-edge](./06-edge/)** - Edge device integrations including physical AI and robotics
+- **[01-tutorials](./01-tutorials/)** - 基礎、マルチエージェントシステム、デプロイメントをカバーする Jupyter ノートブック形式のチュートリアル
+- **[02-samples](./02-samples/)** - 実世界のユースケースと業界別の例
+- **[03-integrations](./03-integrations/)** - AWS サービスやサードパーティツールとの統合例
+- **[04-UX-demos](./04-UX-demos/)** - ユーザーインターフェースを備えたフルスタックアプリケーション
+- **[05-agentic-rag](./05-agentic-rag/)** - 高度な Agentic RAG パターン
+- **[06-edge](./06-edge/)** - 物理 AI やロボティクスを含むエッジデバイス統合
 
-### <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="20" height="20"/> TypeScript Samples
+### <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="20" height="20"/> TypeScript サンプル
 
-- **[typescript/01-tutorials](./typescript/01-tutorials/)** - Step-by-step tutorials for the TypeScript SDK
+- **[typescript/01-tutorials](./typescript/01-tutorials/)** - TypeScript SDK のステップバイステップチュートリアル
 
-## Contributing ❤️
+## コントリビューション ❤️
 
-We welcome contributions! See our [Contributing Guide](CONTRIBUTING.md) for details on:
-- Reporting bugs & features
-- Development setup
-- Contributing via Pull Requests
-- Code of Conduct
-- Reporting of security issues
+コントリビューションを歓迎します！以下の詳細については、[Contributing Guide (貢献ガイド)](CONTRIBUTING.md) をご覧ください:
+- バグ報告と機能要望
+- 開発環境のセットアップ
+- プルリクエストによる貢献
+- 行動規範 (Code of Conduct)
+- セキュリティ問題の報告
 
-## License
+## ライセンス
 
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+このプロジェクトは Apache License 2.0 の下でライセンスされています - 詳細は [LICENSE](LICENSE) ファイルをご覧ください。
 
-## Security
+## セキュリティ
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+詳細については [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) をご覧ください。
+```
