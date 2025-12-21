@@ -1,100 +1,101 @@
-# Memory Persistent Agents
+# メモリ永続化エージェント
 
-This tutorial demonstrates how to build Strands Agents that can remember information across multiple interactions by leveraging persistent memory. With memory persistence, your agent can maintain context and recall information from previous conversations, even after being restarted.
+このチュートリアルでは、永続メモリを活用して複数のインタラクション間で情報を記憶できる Strands Agents の構築方法を示します。メモリ永続化により、エージェントは再起動後でも、コンテキストを維持し、以前の会話から情報を想起できます。
 
-## Key Concepts
+## 主要概念
 
-- **Agent Memory**: Enables agents to store and recall information from previous conversations
-- **Persistence**: Information remains available even after restarting the agent
-- **Vector Storage**: Uses vector embeddings to store and retrieve semantically similar information
-- **Implementation**: Uses the `mem0_memory` tool from [mem0.ai](https://mem0.ai)
+- **エージェントメモリ**: エージェントが以前の会話から情報を保存・想起できるようにします
+- **永続化**: エージェントを再起動した後でも情報が利用可能な状態を保ちます
+- **ベクトルストレージ**: ベクトル埋め込みを使用して意味的に類似した情報を保存・検索します
+- **実装**: [mem0.ai](https://mem0.ai) の `mem0_memory` ツールを使用します
 
-## Memory Backend Options
+## メモリバックエンドオプション
 
-This tutorial supports three different memory backend configurations:
+このチュートリアルは 3 つの異なるメモリバックエンド設定をサポートしています：
 
-1. **OpenSearch Serverless** (Recommended for AWS environments):
-   - Fully managed AWS service for vector storage
-   - Requires AWS credentials and permissions
-   - Automatically deployed with the provided scripts
+1. **OpenSearch Serverless**（AWS 環境に推奨）:
+   - ベクトルストレージ用のフルマネージド AWS サービス
+   - AWS 認証情報と権限が必要
+   - 提供されたスクリプトで自動デプロイ
 
-2. **FAISS** (Default for local development):
-   - Local vector store that doesn't require external services
-   - Suitable for development and testing
-   - Memory is lost when the process ends
+2. **FAISS**（ローカル開発のデフォルト）:
+   - 外部サービスを必要としないローカルベクトルストア
+   - 開発とテストに適しています
+   - プロセスが終了するとメモリは失われます
 
-3. **Mem0 Platform**:
-   - Cloud-based memory service from [mem0.ai](https://mem0.ai)
-   - Requires a Mem0 API key
-   - See notebook for configuration details
+3. **Mem0 プラットフォーム**:
+   - [mem0.ai](https://mem0.ai) のクラウドベースメモリサービス
+   - Mem0 API キーが必要
+   - 設定の詳細はノートブックを参照してください
 
-## Use Cases
+## ユースケース
 
-- Personal assistants that remember user preferences
-- Customer support bots that maintain conversation context
-- Educational agents that track learning progress
-- Enterprise assistants that recall company-specific information
-- Any application where conversation history adds value
+- ユーザーの好みを記憶するパーソナルアシスタント
+- 会話のコンテキストを維持するカスタマーサポートボット
+- 学習進捗を追跡する教育エージェント
+- 企業固有の情報を想起するエンタープライズアシスタント
+- 会話履歴が価値を追加するあらゆるアプリケーション
 
-## Getting Started
+## 始め方
 
-### Prerequisites
+### 前提条件
 - Python 3.10+
-- AWS account with appropriate permissions (for OpenSearch option)
-- Anthropic Claude model enabled on Amazon Bedrock
+- 適切な権限を持つ AWS アカウント（OpenSearch オプション用）
+- Amazon Bedrock で有効化された Anthropic Claude モデル
 
-### Option 1: Interactive Notebook
-Run through the included Jupyter notebook to understand memory concepts and implementation with Strands agents: `./personal_agent_with_memory.ipynb`
+### オプション 1: インタラクティブノートブック
+Strands エージェントでのメモリ概念と実装を理解するために、含まれている Jupyter ノートブックを実行してください: `./personal_agent_with_memory.ipynb`
 
-### Option 2: Command Line Demo
-For an interactive chat experience:
+### オプション 2: コマンドラインデモ
+インタラクティブなチャット体験のために:
 
-1. Install dependencies:
+1. 依存関係をインストール:
    ```
    pip install -r requirements.txt
    ```
 
-2. Create the OpenSearch serverless resources:
+2. OpenSearch サーバーレスリソースを作成:
    ```
    sh prereqs/deploy_OSS.sh
    ```
 
-3. Launch the agent:
+3. エージェントを起動:
    ```
    python personal_agent_with_memory.py
    ```
 
-4. Interact with the agent by asking questions or providing information:
-   - Try "Remember that I prefer tea over coffee"
-   - Later ask "What do I prefer to drink?"
-   - Say "memory" to list all stored memories
+4. 質問をしたり情報を提供したりしてエージェントとやり取り:
+   - 「コーヒーよりも紅茶が好きだと覚えておいて」と試してみる
+   - 後で「私は何を飲むのが好き？」と尋ねる
+   - 「memory」と言うと保存されたすべてのメモリを一覧表示
 
-5. When done, delete the OpenSearch resources:
+5. 完了したら、OpenSearch リソースを削除:
    ```
    sh prereqs/cleanup_OSS.sh
    ```
 
-## Memory Operations
+## メモリ操作
 
-The agent supports three primary memory operations:
+エージェントは 3 つの主要なメモリ操作をサポートしています：
 
-- **store**: Save important information for later retrieval
-- **retrieve**: Access relevant memories based on queries
-- **list**: View all stored memories
+- **store**: 後で検索するために重要な情報を保存
+- **retrieve**: クエリに基づいて関連するメモリにアクセス
+- **list**: 保存されたすべてのメモリを表示
 
-## Experiment Ideas
+## 実験のアイデア
 
-- Tell the agent personal facts and verify recall in later conversations
-- Test memory persistence by restarting the agent between interactions
-- Compare with non-persistent agents to see the difference in user experience
-- Try different types of information to see what the agent remembers best
-- Explore how the agent uses memories to provide more personalized responses
+- エージェントに個人的な事実を伝え、後の会話で想起できるか確認する
+- インタラクション間でエージェントを再起動してメモリの永続性をテストする
+- 非永続エージェントと比較してユーザーエクスペリエンスの違いを確認する
+- さまざまなタイプの情報を試して、エージェントが何を最もよく記憶するかを確認する
+- エージェントがメモリを使用してよりパーソナライズされた応答を提供する方法を探る
 
-## Architecture
+## アーキテクチャ
 
-The tutorial demonstrates two possible architectures:
+このチュートリアルは 2 つの可能なアーキテクチャを示します：
 
-1. **OpenSearch Serverless**: AWS-managed vector database for production use
-2. **Mem0 Platform**: Cloud-based memory service for simplified deployment
+1. **OpenSearch Serverless**: 本番環境用の AWS マネージドベクトルデータベース
+2. **Mem0 プラットフォーム**: 簡素化されたデプロイのためのクラウドベースメモリサービス
 
-See the notebook for architecture diagrams and detailed explanations.
+アーキテクチャ図と詳細な説明については、ノートブックを参照してください。
+```
