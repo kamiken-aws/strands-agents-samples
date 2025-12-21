@@ -1,22 +1,22 @@
-# Getting Started with Strands BidiAgent 
+# Strands BidiAgent を始めよう
 
-## What is a Bidirectional Streaming Agent?
+## 双方向ストリーミングエージェントとは？
 
-A bidirectional streaming agent enables real-time, two-way voice conversations with AI models. Unlike traditional request-response patterns, these agents:
+双方向ストリーミングエージェントは、AI モデルとのリアルタイムな双方向の音声会話を可能にします。従来のリクエスト-レスポンスパターンとは異なり、これらのエージェントは：
 
-- **Stream audio in both directions** - Speak naturally while the agent listens and responds with voice
-- **Support interruptions** - Cut in at any time, just like a real conversation
-- **Execute tools in real-time** - The agent can call functions (like calculations or searches) while maintaining the conversation flow
-- **Provide live transcripts** - See what you said and what the agent is saying as it happens
+- **双方向の音声ストリーミング** - 自然に話しながら、エージェントが聞いて音声で応答
+- **割り込みのサポート** - 実際の会話のように、いつでも割り込むことができる
+- **リアルタイムでのツール実行** - エージェントは会話の流れを維持しながら関数（計算や検索など）を呼び出すことができる
+- **ライブ文字起こし** - あなたが言ったことやエージェントが言っていることをリアルタイムで確認
 
-These samples demonstrates how to build voice-enabled AI agents using Strands with models like AWS Nova Sonic, Google Gemini Live, and OpenAI Realtime API.
+これらのサンプルは、AWS Nova Sonic、Google Gemini Live、OpenAI Realtime API などのモデルを使用して、Strands で音声対応 AI エージェントを構築する方法を示しています。
 
-```python
+```
 from strands.experimental.bidi.agent import BidiAgent
 from strands.experimental.bidi.models.nova_sonic import BidiNovaSonicModel
 from strands_tools import calculator
 
-# Create a voice-enabled agent with tools
+# ツールを持つ音声対応エージェントを作成
 agent = BidiAgent(
     model=BidiNovaSonicModel(
         region="us-east-1",
@@ -33,225 +33,225 @@ agent = BidiAgent(
     system_prompt="You are a helpful voice assistant."
 )
 
-# Start streaming conversation
+# ストリーミング会話を開始
 await agent.run(inputs=[...], outputs=[...])
 ```
 
-## Architecture
+## アーキテクチャ
 
 ```
-Browser (HTML/JS) ←→ WebSocket ←→ BidiAgent ←→ AI Model
+ブラウザ (HTML/JS) ←→ WebSocket ←→ BidiAgent ←→ AI モデル
 ```
 
-- Browser captures microphone audio and encodes to base64 PCM
-- WebSocket forwards audio events bidirectionally
-- BidiAgent processes audio and executes tools
-- Responses stream back as audio + transcripts
+- ブラウザがマイクの音声をキャプチャし、base64 PCM にエンコード
+- WebSocket が双方向に音声イベントを転送
+- BidiAgent が音声を処理してツールを実行
+- レスポンスが音声 + 文字起こしとしてストリーミングで返される
 
-## Installation
+## インストール
 
-### Prerequisites
+### 前提条件
 
 - Python 3.12+
-- pip or uv package manager
+- pip または uv パッケージマネージャー
 
-### Setup
+### セットアップ
 
-1. **Create virtual environment**
-```bash
+1. **仮想環境を作成**
+```
 python -m venv .venv
 
-# Mac or Linux
+# Mac または Linux
 source .venv/bin/activate  
 
-# On Windows: 
+# Windows の場合: 
 .venv\Scripts\activate
 ```
 
-2. **Install dependencies**
-```bash
+2. **依存関係をインストール**
+```
 pip install -r requirements.txt
 ```
 
-Or install directly:
-```bash
+または直接インストール：
+```
 pip install fastapi uvicorn strands-agents[bidi-all] strands-agents-tools
 ```
 
-3. **Set up credentials** (for the models you want to use)
+3. **認証情報を設定**（使用するモデル用）
 
-**For AWS Nova Sonic:**
-```bash
+**AWS Nova Sonic の場合：**
+```
 export AWS_ACCESS_KEY_ID="your-key"
 export AWS_SECRET_ACCESS_KEY="your-secret"
-export AWS_SESSION_TOKEN="your-token"  # if using temporary credentials
+export AWS_SESSION_TOKEN="your-token"  # 一時的な認証情報を使用する場合
 ```
 
-**For Google Gemini Live:**
-```bash
+**Google Gemini Live の場合：**
+```
 export GOOGLE_API_KEY="your-key"
 ```
 
-**For OpenAI Realtime:**
-```bash
+**OpenAI Realtime の場合：**
+```
 export OPENAI_API_KEY="your-key"
 ```
 
-## Usage
+## 使用方法
 
-### WebSocket Demo (Recommended)
+### WebSocket デモ（推奨）
 
-Start the WebSocket server with automatic browser launch:
+WebSocket サーバーを起動して自動的にブラウザを開きます：
 
-```bash
-# On default port: 8000
+```
+# デフォルトポート: 8000
 python websocket_example.py
 ```
 
-Or specify a custom port:
+またはカスタムポートを指定：
 
-```bash
+```
 python websocket_example.py 8080
 ```
 
-The browser will automatically open to `http://localhost:8000` (or your specified port).
+ブラウザが自動的に `http://localhost:8000`（または指定したポート）を開きます。
 
-**In the browser:**
-1. Select your preferred AI model from the dropdown
-2. Click "🚀 Start Session" to connect and start recording
-3. Speak naturally - try "What is 25 times 8?"
-4. The agent will respond with voice and show transcripts
-5. You can interrupt the agent by speaking while it's talking
-6. Click "🛑 End Session" to stop
+**ブラウザでの操作：**
+1. ドロップダウンから希望の AI モデルを選択
+2. 「🚀 Start Session」をクリックして接続と録音を開始
+3. 自然に話す - 「25 かける 8 は何？」と試してみる
+4. エージェントが音声で応答し、文字起こしを表示
+5. エージェントが話している間に話すことで割り込むことができる
+6. 「🛑 End Session」をクリックして停止
 
-### Command-Line Tests
+### コマンドラインテスト
 
-Test individual models directly from the command line:
+コマンドラインから個々のモデルを直接テスト：
 
-> **⚠️ Important:** The command-line tests use PyAudio which does **not** have echo cancellation. You **must** use a headset to prevent audio feedback loops. For the best experience with speakers, use the WebSocket demo which has echo cancellation enabled in the browser.
+> **⚠️ 重要：** コマンドラインテストは PyAudio を使用しており、エコーキャンセレーション機能は**ありません**。音声フィードバックループを防ぐために、ヘッドセットを**必ず**使用してください。スピーカーで最高の体験を得るには、ブラウザでエコーキャンセレーションが有効になっている WebSocket デモを使用してください。
 
-**Nova Sonic:**
-```bash
+**Nova Sonic：**
+```
 python test_simple_novasonic.py
 ```
 
-**Gemini Live:**
-```bash
+**Gemini Live：**
+```
 python test_simple_gemini.py
 ```
 
-**OpenAI Realtime:**
-```bash
+**OpenAI Realtime：**
+```
 python test_simple_openai.py
 ```
 
-## Project Structure
+## プロジェクト構成
 
 ```
 .
-├── websocket_example.py      # FastAPI WebSocket server
-├── websocket_client.html     # Modern web UI client
-├── test_simple_novasonic.py  # Nova Sonic CLI test
-├── test_simple_gemini.py     # Gemini Live CLI test
-├── test_simple_openai.py     # OpenAI Realtime CLI test
-├── requirements.txt          # Python dependencies
-└── README.md                 # This file
+├── websocket_example.py      # FastAPI WebSocket サーバー
+├── websocket_client.html     # モダンな Web UI クライアント
+├── test_simple_novasonic.py  # Nova Sonic CLI テスト
+├── test_simple_gemini.py     # Gemini Live CLI テスト
+├── test_simple_openai.py     # OpenAI Realtime CLI テスト
+├── requirements.txt          # Python 依存関係
+└── README.md                 # このファイル
 ```
 
-## WebSocket Events
+## WebSocket イベント
 
-### Client → Server
+### クライアント → サーバー
 
-- `bidi_audio_input` - PCM audio chunks from microphone
-  - Format: base64-encoded PCM
-  - Sample rate: Model-specific (16kHz or 24kHz)
-  - Channels: 1 (mono)
+- `bidi_audio_input` - マイクからの PCM 音声チャンク
+  - フォーマット: base64 エンコードされた PCM
+  - サンプルレート: モデル固有（16kHz または 24kHz）
+  - チャンネル: 1（モノラル）
 
-### Server → Client
+### サーバー → クライアント
 
-- `bidi_audio_stream` - PCM audio response from agent
-- `bidi_transcript_stream` - Real-time transcription (user/assistant)
-- `bidi_interruption` - Notification when user interrupts
-- `tool_use_stream` - Tool execution started
-- `tool_result` - Tool execution result
+- `bidi_audio_stream` - エージェントからの PCM 音声レスポンス
+- `bidi_transcript_stream` - リアルタイム文字起こし（ユーザー/アシスタント）
+- `bidi_interruption` - ユーザーが割り込んだときの通知
+- `tool_use_stream` - ツール実行開始
+- `tool_result` - ツール実行結果
 
-## Event Formats
+## イベントフォーマット
 
-### Client → Server Events
+### クライアント → サーバーイベント
 
 **bidi_audio_input**
-```json
+```
 {
   "type": "bidi_audio_input",
   "audio": "base64-encoded-pcm-data..."
 }
 ```
-Send audio chunks from the microphone as base64-encoded PCM. The sample rate should match the model's requirements (16kHz for Nova Sonic, 24kHz for Gemini/OpenAI).
+マイクからの音声チャンクを base64 エンコードされた PCM として送信します。サンプルレートはモデルの要件に一致する必要があります（Nova Sonic は 16kHz、Gemini/OpenAI は 24kHz）。
 
-### Server → Client Events
+### サーバー → クライアントイベント
 
 **bidi_audio_stream**
-```json
+```
 {
   "type": "bidi_audio_stream",
   "audio": "base64-encoded-pcm-data..."
 }
 ```
-Receive audio response from the agent. Decode and play through speakers.
+エージェントからの音声レスポンスを受信します。デコードしてスピーカーで再生します。
 
 **bidi_transcript_stream**
-```json
+```
 {
   "type": "bidi_transcript_stream",
-  "role": "user",  // or "assistant"
+  "role": "user",  // または "assistant"
   "text": "What is 25 times 8?"
 }
 ```
-Real-time transcription of both user speech and assistant responses.
+ユーザーの発話とアシスタントのレスポンスの両方のリアルタイム文字起こし。
 
 **bidi_interruption**
-```json
+```
 {
   "type": "bidi_interruption"
 }
 ```
-Sent when the user interrupts the agent. Stop playing current audio and clear buffers.
+ユーザーがエージェントを割り込んだときに送信されます。現在の音声の再生を停止し、バッファをクリアします。
 
 **tool_use_stream**
-```json
+```
 {
   "type": "tool_use_stream",
   "tool_name": "calculator",
   "tool_input": {"operation": "multiply", "a": 25, "b": 8}
 }
 ```
-Notification that the agent is executing a tool.
+エージェントがツールを実行していることの通知。
 
 **tool_result**
-```json
+```
 {
   "type": "tool_result",
   "tool_name": "calculator",
   "result": 200
 }
 ```
-The result returned from tool execution.
+ツール実行から返された結果。
 
-## Transcript Buffering
+## 文字起こしバッファリング
 
-- **Nova Sonic**: Displays transcripts immediately (works well as-is)
-- **Gemini & OpenAI**: Buffers short transcript chunks for 1 second before displaying
-  - Groups multiple small updates into coherent messages
-  - Updates in real-time as chunks arrive
-  - Creates cleaner, more readable conversation flow
+- **Nova Sonic**: 文字起こしを即座に表示（そのままで適切に動作）
+- **Gemini & OpenAI**: 短い文字起こしチャンクを 1 秒間バッファリングしてから表示
+  - 複数の小さな更新を一貫性のあるメッセージにグループ化
+  - チャンクが到着すると同時にリアルタイムで更新
+  - より綺麗で読みやすい会話フローを作成
 
-## Development
+## 開発
 
-### Adding New Tools
+### 新しいツールの追加
 
-Tools can be added to the `tools` parameter in `websocket_example.py`. The agent is already configured with the calculator tool:
+ツールは `websocket_example.py` の `tools` パラメータに追加できます。エージェントにはすでに calculator ツールが設定されています：
 
-```python
+```
 from strands_tools import calculator
 
 agent = BidiAgent(
@@ -261,19 +261,19 @@ agent = BidiAgent(
 )
 ```
 
-You can add additional tools from `strands_tools` or create custom tools following the Strands tools specification.
+`strands_tools` から追加のツールを追加したり、Strands ツール仕様に従ってカスタムツールを作成したりできます。
 
-## Event Format Reference
+## イベントフォーマットリファレンス
 
-This section provides detailed specifications for all WebSocket events exchanged between the client and server.
+このセクションでは、クライアントとサーバー間で交換されるすべての WebSocket イベントの詳細な仕様を提供します。
 
-### Client → Server Events
+### クライアント → サーバーイベント
 
 **bidi_audio_input**
 
-Sends audio chunks from the microphone to the agent.
+マイクからの音声チャンクをエージェントに送信します。
 
-```json
+```
 {
   "type": "bidi_audio_input",
   "audio": "base64-encoded-pcm-data...",
@@ -283,18 +283,18 @@ Sends audio chunks from the microphone to the agent.
 }
 ```
 
-- `audio`: Base64-encoded PCM audio data
-- `format`: Always "pcm" (16-bit signed integer)
-- `sample_rate`: 16000 for Nova Sonic, 24000 for Gemini/OpenAI
-- `channels`: Always 1 (mono)
+- `audio`: Base64 エンコードされた PCM 音声データ
+- `format`: 常に "pcm"（16 ビット符号付き整数）
+- `sample_rate`: Nova Sonic は 16000、Gemini/OpenAI は 24000
+- `channels`: 常に 1（モノラル）
 
-### Server → Client Events
+### サーバー → クライアントイベント
 
 **bidi_audio_stream**
 
-Streams audio response from the agent back to the client.
+エージェントからの音声レスポンスをクライアントにストリーミングします。
 
-```json
+```
 {
   "type": "bidi_audio_stream",
   "audio": "base64-encoded-pcm-data...",
@@ -304,16 +304,16 @@ Streams audio response from the agent back to the client.
 }
 ```
 
-- `audio`: Base64-encoded PCM audio data to play through speakers
-- `format`: Always "pcm" (16-bit signed integer)
-- `sample_rate`: 16000 for Nova Sonic, 24000 for Gemini/OpenAI
-- `channels`: Always 1 (mono)
+- `audio`: スピーカーで再生する base64 エンコードされた PCM 音声データ
+- `format`: 常に "pcm"（16 ビット符号付き整数）
+- `sample_rate`: Nova Sonic は 16000、Gemini/OpenAI は 24000
+- `channels`: 常に 1（モノラル）
 
 **bidi_transcript_stream**
 
-Provides real-time transcription of both user speech and assistant responses.
+ユーザーの発話とアシスタントのレスポンスの両方のリアルタイム文字起こしを提供します。
 
-```json
+```
 {
   "type": "bidi_transcript_stream",
   "delta": {
@@ -325,31 +325,31 @@ Provides real-time transcription of both user speech and assistant responses.
 }
 ```
 
-- `delta`: Incremental text update (new words added)
-- `text`: Complete transcript text accumulated so far
-- `role`: Either "user" or "assistant"
-- `is_final`: Boolean indicating if this is the final transcript
+- `delta`: 増分テキスト更新（追加された新しい単語）
+- `text`: これまでに蓄積された完全な文字起こしテキスト
+- `role`: "user" または "assistant"
+- `is_final`: これが最終的な文字起こしかどうかを示すブール値
 
 **bidi_interruption**
 
-Signals that the user has interrupted the agent's speech.
+ユーザーがエージェントの発話を割り込んだことを通知します。
 
-```json
+```
 {
   "type": "bidi_interruption"
 }
 ```
 
-When received, the client should:
-- Stop playing current audio immediately
-- Clear audio playback buffers
-- Reset the audio context
+受信時、クライアントは以下を行う必要があります：
+- 現在の音声を即座に停止
+- 音声再生バッファをクリア
+- オーディオコンテキストをリセット
 
 **bidi_usage**
 
-Reports token usage statistics for the conversation.
+会話のトークン使用統計を報告します。
 
-```json
+```
 {
   "type": "bidi_usage",
   "inputTokens": 22,
@@ -358,15 +358,15 @@ Reports token usage statistics for the conversation.
 }
 ```
 
-- `inputTokens`: Number of tokens in user input
-- `outputTokens`: Number of tokens in agent response
-- `totalTokens`: Sum of input and output tokens
+- `inputTokens`: ユーザー入力のトークン数
+- `outputTokens`: エージェントレスポンスのトークン数
+- `totalTokens`: 入力と出力のトークンの合計
 
 **tool_use_stream**
 
-Notifies that the agent is executing a tool.
+エージェントがツールを実行していることを通知します。
 
-```json
+```
 {
   "type": "tool_use_stream",
   "current_tool_use": {
@@ -380,14 +380,14 @@ Notifies that the agent is executing a tool.
 }
 ```
 
-- `current_tool_use.name`: Name of the tool being executed
-- `current_tool_use.input`: Parameters passed to the tool
+- `current_tool_use.name`: 実行されているツールの名前
+- `current_tool_use.input`: ツールに渡されるパラメータ
 
 **tool_result**
 
-Returns the result from tool execution.
+ツール実行からの結果を返します。
 
-```json
+```
 {
   "type": "tool_result",
   "tool_result": {
@@ -400,34 +400,35 @@ Returns the result from tool execution.
 }
 ```
 
-- `tool_result.content`: Array of result objects
-- `tool_result.content[].text`: String representation of the result
+- `tool_result.content`: 結果オブジェクトの配列
+- `tool_result.content[].text`: 結果の文字列表現
 
-### Audio Format Details
+### 音声フォーマットの詳細
 
-All audio is transmitted as base64-encoded PCM (Pulse Code Modulation):
+すべての音声は base64 エンコードされた PCM（Pulse Code Modulation）として送信されます：
 
-- **Encoding**: 16-bit signed integer, little-endian
-- **Channels**: 1 (mono)
-- **Sample Rate**: Model-dependent
+- **エンコーディング**: 16 ビット符号付き整数、リトルエンディアン
+- **チャンネル**: 1（モノラル）
+- **サンプルレート**: モデル依存
   - Nova Sonic: 16 kHz
   - Gemini Live: 24 kHz
   - OpenAI Realtime: 24 kHz
 
-To decode base64 audio in JavaScript:
+JavaScript で base64 音声をデコードするには：
 
-```javascript
-// Decode base64 to bytes
+```
+// base64 をバイトにデコード
 const binaryString = atob(base64Audio);
 const bytes = new Uint8Array(binaryString.length);
 for (let i = 0; i < binaryString.length; i++) {
     bytes[i] = binaryString.charCodeAt(i);
 }
 
-// Convert to Int16 then Float32 for Web Audio API
+// Web Audio API 用に Int16 から Float32 に変換
 const int16Data = new Int16Array(bytes.buffer);
 const float32Data = new Float32Array(int16Data.length);
 for (let i = 0; i < int16Data.length; i++) {
     float32Data[i] = int16Data[i] / 32768.0;
 }
+```
 ```
