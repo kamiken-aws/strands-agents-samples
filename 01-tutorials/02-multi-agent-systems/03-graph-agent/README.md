@@ -1,13 +1,14 @@
-### What is an Agent Graph?
+### Agent Graph とは？
 
-An Agent Graph is a collection of AI agents organized in a specific topology where:
+Agent Graph は、特定のトポロジーで組織化された AI エージェントのコレクションで、以下の要素から構成されます：
 
-- **Nodes**: Individual agents with specific roles, identity, tools and system prompts
-- **Edges**: Communication paths between agents
-- **Conditional Edges**: Conditional logic for edges to create dynamic workflows
+- **ノード**: 特定の役割、アイデンティティ、ツール、システムプロンプトを持つ個別のエージェント
+- **エッジ**: エージェント間の通信パス
+- **条件付きエッジ**: 動的なワークフローを作成するためのエッジの条件ロジック
 
 
 
-### Example
+### 例
 
-To get started with building agents with these patterns. Navigate to `graph.ipynb` to build a graph using the **star topology**.
+これらのパターンを使用してエージェントを構築し始めるには、`graph.ipynb` に移動して**スタートポロジー**を使用したグラフを構築してください。
+```
