@@ -1,32 +1,33 @@
-## Model Providers in Strands Agents
+## Strands Agents のモデルプロバイダー
 
-Strands Agents supports multiple model providers, allowing you to choose the best foundation model for your specific use case. This flexibility enables you to build agents that can leverage different capabilities, cost structures, and deployment options.
-Supported Model Providers
+Strands Agents は複数のモデルプロバイダーをサポートしており、特定のユースケースに最適な基盤モデルを選択できます。この柔軟性により、さまざまな機能、コスト構造、デプロイメントオプションを活用できるエージェントを構築できます。
+サポートされているモデルプロバイダー
 
-Strands Agents supports several model providers out of the box:
+Strands Agents は、すぐに使えるいくつかのモデルプロバイダーをサポートしています：
 
-1. [**AWS Bedrock**](https://strandsagents.com/0.1.x/user-guide/concepts/model-providers/amazon-bedrock/): Use Amazon's managed service to access high-performing foundation models from leading Providers like Anthropic, Meta, Amazon etc.
-2. [**Anthropic**](https://strandsagents.com/0.1.x/user-guide/concepts/model-providers/anthropic/): Direct API access to Claude models
-3. [**Ollama**](https://strandsagents.com/0.1.x/user-guide/concepts/model-providers/ollama/): Run models locally for privacy or offline use
-4. [**LiteLLM**](https://strandsagents.com/0.1.x/user-guide/concepts/model-providers/litellm/): Unified interface for OpenAI, Mistral, and other providers
-    - **Azure OpenAI**: Leverage OpenAI models hosted on Microsoft Azure
-    - **OpenAI**: Access models like GPT-4/ gpt-4o
-5. [**Custom Providers**](https://strandsagents.com/0.1.x/user-guide/concepts/model-providers/custom_model_provider/): Build your own provider for specialized needs
+1. [**AWS Bedrock**](https://strandsagents.com/0.1.x/user-guide/concepts/model-providers/amazon-bedrock/): Amazon のマネージドサービスを使用して、Anthropic、Meta、Amazon などの主要プロバイダーの高性能基盤モデルにアクセス
+2. [**Anthropic**](https://strandsagents.com/0.1.x/user-guide/concepts/model-providers/anthropic/): Claude モデルへの直接 API アクセス
+3. [**Ollama**](https://strandsagents.com/0.1.x/user-guide/concepts/model-providers/ollama/): プライバシーやオフライン使用のためにモデルをローカルで実行
+4. [**LiteLLM**](https://strandsagents.com/0.1.x/user-guide/concepts/model-providers/litellm/): OpenAI、Mistral、その他のプロバイダーのための統一インターフェース
+    - **Azure OpenAI**: Microsoft Azure でホストされている OpenAI モデルを活用
+    - **OpenAI**: GPT-4 / gpt-4o などのモデルにアクセス
+5. [**カスタムプロバイダー**](https://strandsagents.com/0.1.x/user-guide/concepts/model-providers/custom_model_provider/): 専門的なニーズに対応する独自のプロバイダーを構築
 
-## Model tutorials
-In this folder you'll find two samples:
+## モデルチュートリアル
+このフォルダには 2 つのサンプルがあります：
 
 1. [Ollama](./01-ollama-model/):
-We showcase an example of a local file-ops agent that can perform simple operations (`file_read`, `file_write` and `list_directory`). You can extend it to add more tools to make it more capable.
+シンプルな操作（`file_read`、`file_write`、`list_directory`）を実行できるローカルファイル操作エージェントの例を紹介します。より多くのツールを追加して機能を拡張できます。
 
-Here's the architecture:
+アーキテクチャは以下の通りです：
 ![Architecture](./01-ollama-model/images/architecture.png)
 
-2. [OpenAI Access via LiteLLM](./02-openai-model/):
-We show an example of a simple agent that can access OpenAI models via Azure. It has access to basic tools like `current_weather` and `current_time`.
+2. [LiteLLM 経由の OpenAI アクセス](./02-openai-model/):
+Azure 経由で OpenAI モデルにアクセスできるシンプルなエージェントの例を示します。`current_weather` や `current_time` などの基本的なツールにアクセスできます。
 
-Here's the architecture:
+アーキテクチャは以下の通りです：
 ![Architecture](./02-openai-model/images/architecture.png)
 
 
-Note: For all models you can add [Callback Handlers](https://strandsagents.com/0.1.x/user-guide/concepts/streaming/callback-handlers/) that allow you to intercept and process events during agent execution.
+注：すべてのモデルに対して、エージェント実行中にイベントをインターセプトして処理できる [Callback Handlers](https://strandsagents.com/0.1.x/user-guide/concepts/streaming/callback-handlers/) を追加できます。
+```
