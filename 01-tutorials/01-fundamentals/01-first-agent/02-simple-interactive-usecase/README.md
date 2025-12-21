@@ -1,17 +1,18 @@
-# Interactive Recipe Bot
+# インタラクティブレシピボット
 
-This example demonstrates a simple interactive agent that helps with recipes and cooking information.
+この例は、レシピと料理情報を支援するシンプルなインタラクティブエージェントを示しています。
 
-## Architecture
-Here is what we are building:
+## アーキテクチャ
+以下は構築するものです：
 ![Architecture](../images/interactive_recipe_agent.png)
 
-## Running the Recipe Bot
+## レシピボットの実行
 
-1. Navigate to this directory: `cd /02-simple-interactive-usecase/`
-2. Install dependencies: `pip install -r requirements.txt`
-3. Run the bot: `python recipe_bot.py`
+1. このディレクトリに移動：`cd /02-simple-interactive-usecase/`
+2. 依存関係をインストール：`pip install -r requirements.txt`
+3. ボットを実行：`python recipe_bot.py`
 
-You can then interact with the Recipe Bot through the command line interface. Ask for recipes, cooking tips, or general food information.
+その後、コマンドラインインターフェースを通じてレシピボットとやり取りできます。レシピ、料理のヒント、または一般的な食品情報について尋ねてください。
 
-Type `exit` to quit the application.
+アプリケーションを終了するには `exit` と入力してください。
+```
