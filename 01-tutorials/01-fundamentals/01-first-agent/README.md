@@ -1,70 +1,71 @@
-# Getting Started with Strands Agents
+# Strands Agents を始めよう
 
-This guide will help you understand the basic concepts of Strands Agents and get you up and running with your first agent.
+このガイドでは、Strands Agents の基本概念を理解し、最初のエージェントを実行できるようサポートします。
 
-## Prerequisites
+## 前提条件
 
-- Python 3.10 or later
-- AWS account configured with appropriate permissions
-- Basic understanding of Python programming
+- Python 3.10 以降
+- 適切な権限で設定された AWS アカウント
+- Python プログラミングの基礎知識
 
-## Installation
+## インストール
 
-Install Strands Agents and the tools package using pip:
+pip を使用して Strands Agents とツールパッケージをインストールします：
 
-```bash
+```
 pip install strands-agents strands-agents-tools
 ```
 
-## Basic Concepts
+## 基本概念
 
-Strands Agents is a framework for building AI agents that can interact with AWS services and perform complex tasks. The key components are:
+Strands Agents は、AWS サービスと連携し、複雑なタスクを実行できる AI エージェントを構築するためのフレームワークです。主要なコンポーネントは以下の通りです：
 
-1. **Agent**: The core component that manages the conversation and orchestrates tools
-2. **Model**: The underlying LLM (Large Language Model) that powers the agent
-3. **Tools**: Functions that the agent can use to perform specific tasks
-4. **Sessions and State**: Mechanisms for maintaining conversation history and agent state across interactions
-5. **Agent Loop**: The process flow of how agents receive input, process it, and generate responses
-6. **Context Management**: How agents maintain and manage conversation context, including memory and retrieval
+1. **Agent（エージェント）**: 会話を管理し、ツールを調整するコアコンポーネント
+2. **Model（モデル）**: エージェントを動かす基盤となる LLM（大規模言語モデル）
+3. **Tools（ツール）**: エージェントが特定のタスクを実行するために使用できる関数
+4. **Sessions and State（セッションと状態）**: インタラクション全体で会話履歴とエージェントの状態を維持する仕組み
+5. **Agent Loop（エージェントループ）**: エージェントが入力を受け取り、処理し、応答を生成するプロセスフロー
+6. **Context Management（コンテキスト管理）**: エージェントがメモリと検索を含む会話コンテキストを維持・管理する方法
 
-## Quick Start Guide
+## クイックスタートガイド
 
-The `01-first-agent.ipynb` notebook in this directory provides a comprehensive guide with code examples for:
+このディレクトリの `01-first-agent.ipynb` ノートブックは、以下のコード例を含む包括的なガイドを提供します：
 
-1. **Creating a Simple Agent**: Learn how to initialize a basic agent with a system prompt
-2. **Adding Tools**: Discover how to enhance your agent with built-in and custom tools
-3. **Configuring Logging**: Set up proper logging for debugging and monitoring
-4. **Customizing the Agent**: Choose different models and configure their parameters
+1. **シンプルなエージェントの作成**: システムプロンプトを使用して基本的なエージェントを初期化する方法を学ぶ
+2. **ツールの追加**: 組み込みツールとカスタムツールでエージェントを強化する方法を発見する
+3. **ロギングの設定**: デバッグと監視のための適切なロギングをセットアップする
+4. **エージェントのカスタマイズ**: 異なるモデルを選択し、そのパラメータを設定する
 
-## Running the Examples
+## サンプルの実行
 
-This folder contains a getting-started notebook and a simple usecase to help you get started:
+このフォルダには、始めるのに役立つ入門ノートブックとシンプルなユースケースが含まれています：
 
-1. **01-first-agent.ipynb**: A Jupyter notebook with a comprehensive quickstart guide and a usecase.
-Here we'll build:
+1. **01-first-agent.ipynb**: 包括的なクイックスタートガイドとユースケースを含む Jupyter ノートブック。
+ここでは以下を構築します：
 ![Architecture](./images/agent_with_tools.png)
 
-and a Recipe Agent:
+そしてレシピエージェント：
 
 ![Architecture](./images/interactive_recipe_agent.png)
 
 
-2. **02-simple-interactive-usecase/**: A directory containing a simple interactive cooking/Recipe agent to be run via the CLI.
+2. **02-simple-interactive-usecase/**: CLI 経由で実行するシンプルなインタラクティブな料理/レシピエージェントを含むディレクトリ。
 
 
-To run the interactive agent:
+インタラクティブエージェントを実行するには：
 
-1. Navigate to the directory: `cd 02-simple-interactive-usecase`
-2. Install the requirements: `pip install -r requirements.txt`
-3. Run the script: `python recipe_bot.py`
+1. ディレクトリに移動：`cd 02-simple-interactive-usecase`
+2. 必要なパッケージをインストール：`pip install -r requirements.txt`
+3. スクリプトを実行：`python recipe_bot.py`
 
-## Resources
+## リソース
 
-- Explore the [Strands documentation](https://strandsagents.com/latest/user-guide/quickstart/) for more detailed guides
-- Learn more about [Sessions and State](https://strandsagents.com/latest/user-guide/concepts/agents/sessions-state)
-- Understand the [Agent Loop](https://strandsagents.com/latest/user-guide/concepts/agents/agent-loop/)
-- Dive into [Context Management](https://strandsagents.com/latest/user-guide/concepts/agents/context-management/)
-- Check out the [strands-agents-tools](https://github.com/strands-agents/tools) repository for pre-implemented tools
-- Try building your own task-specific agent by customizing the system prompt and adding relevant tools
+- より詳細なガイドについては [Strands ドキュメント](https://strandsagents.com/latest/user-guide/quickstart/) を参照してください
+- [Sessions and State](https://strandsagents.com/latest/user-guide/concepts/agents/sessions-state) について詳しく学ぶ
+- [Agent Loop](https://strandsagents.com/latest/user-guide/concepts/agents/agent-loop/) を理解する
+- [Context Management](https://strandsagents.com/latest/user-guide/concepts/agents/context-management/) を深く掘り下げる
+- 事前実装されたツールについては [strands-agents-tools](https://github.com/strands-agents/tools) リポジトリをチェックしてください
+- システムプロンプトをカスタマイズし、関連するツールを追加して、独自のタスク特化型エージェントを構築してみてください
 
-Happy building with Strands Agents! 🚀
+Strands Agents で楽しく開発しましょう！🚀
+```
