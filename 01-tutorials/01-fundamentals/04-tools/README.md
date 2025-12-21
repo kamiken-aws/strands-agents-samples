@@ -1,56 +1,56 @@
-# Creating Tools with Strands SDK
+# Strands SDK でツールを作成する
 
-This guide explains the different ways to create tools for your Strands Agents.
+このガイドでは、Strands Agents のツールを作成するさまざまな方法を説明します。
 
-## Ways to Create Tools
+## ツールを作成する方法
 
-### 1. Using the `@tool` Decorator
+### 1. `@tool` デコレーターの使用
 
-The simplest way to create a tool is by using the `@tool` decorator on a Python function:
+ツールを作成する最も簡単な方法は、Python 関数に `@tool` デコレーターを使用することです：
 
-```python
+```
 from strands import tool
 
 @tool
 def my_tool(param1: str, param2: int) -> str:
     """
-    Description of what my tool does.
+    このツールが何をするかの説明。
     
     Args:
-        param1: Description of first parameter
-        param2: Description of second parameter
+        param1: 最初のパラメータの説明
+        param2: 2 番目のパラメータの説明
         
     Returns:
-        Description of what is returned
+        返されるものの説明
     """
-    # Dummy implementation
+    # ダミー実装
     return f"Result: {param1}, {param2}"
 ```
 
-Note: This approach uses Python docstrings to document the tool and type hints for parameter validation
+注：このアプローチは、Python の docstring を使用してツールを文書化し、型ヒントをパラメータ検証に使用します
 
-### 2. Using TOOL_SPEC Dictionary
+### 2. TOOL_SPEC 辞書の使用
 
-For more control over tool definition, you can use the TOOL_SPEC dictionary approach:
+ツール定義をより細かく制御するには、TOOL_SPEC 辞書アプローチを使用できます：
 
-```python
+```
 from strands.types.tools import ToolResult, ToolUse
 from typing import Any
 
 TOOL_SPEC = {
     "name": "my_tool",
-    "description": "Description of what this tool does",
+    "description": "このツールが何をするかの説明",
     "inputSchema": {
         "json": {
             "type": "object",
             "properties": {
                 "param1": {
                     "type": "string",
-                    "description": "Description of first parameter"
+                    "description": "最初のパラメータの説明"
                 },
                 "param2": {
                     "type": "integer",
-                    "description": "Description of second parameter",
+                    "description": "2 番目のパラメータの説明",
                     "default": 2
                 }
             },
@@ -59,13 +59,13 @@ TOOL_SPEC = {
     }
 }
 
-# Function name must match tool name
+# 関数名はツール名と一致する必要があります
 def my_tool(tool: ToolUse, **kwargs: Any) -> ToolResult:
     tool_use_id = tool["toolUseId"]
     param1 = tool["input"].get("param1")
     param2 = tool["input"].get("param2", 2)
     
-    # Tool implementation
+    # ツールの実装
     result = f"Result: {param1}, {param2}"
     
     return {
@@ -75,29 +75,29 @@ def my_tool(tool: ToolUse, **kwargs: Any) -> ToolResult:
     }
 ```
 
-This approach gives you more control over input schema definition. Here you can define explicit handling of success and error states.
+このアプローチにより、入力スキーマ定義をより細かく制御できます。ここでは、成功状態とエラー状態の明示的な処理を定義できます。
 
-Note: This follows the Amazon Bedrock Converse API format
+注：これは Amazon Bedrock Converse API 形式に従います
 
-#### Usage
+#### 使用方法
 
-You can import the tool through a function or from another file as well like so:
+次のように、関数を通じて、または別のファイルからツールをインポートすることもできます：
 
-```python
+```
 agent = Agent(tools=[my_tool])
-# or 
+# または 
 agent = Agent(tools=["./my_tool.py"])
 ```
 
-### 3. Using MCP (Model Context Protocol) Tools
+### 3. MCP（Model Context Protocol）ツールの使用
 
-You can also integrate external tools using the Model Context Protocol:
+Model Context Protocol を使用して外部ツールを統合することもできます：
 
-```python
+```
 from mcp import StdioServerParameters, stdio_client
 from strands.tools.mcp import MCPClient
 
-# Connect to an MCP server
+# MCP サーバーに接続
 mcp_client = MCPClient(
     lambda: stdio_client(
         StdioServerParameters(
@@ -106,26 +106,27 @@ mcp_client = MCPClient(
     )
 )
 
-# Use the tools in your agent
+# エージェントでツールを使用
 with mcp_client:
     tools = mcp_client.list_tools_sync()
     agent = Agent(tools=tools)
 ```
 
-This approach connects to external tool providers through MCP, thus allowing tools from different servers. It supports both stdio and HTTP transports
+このアプローチは、MCP を通じて外部ツールプロバイダーに接続し、異なるサーバーからのツールを使用できるようにします。stdio と HTTP トランスポートの両方をサポートしています
 
-## Best Practices
+## ベストプラクティス
 
-1. **Tool Naming**: Use clear, descriptive names for your tools
-2. **Documentation**: Provide detailed descriptions of what the tool does and its parameters
-3. **Error Handling**: Include proper error handling in your tools
-4. **Parameter Validation**: Validate inputs before processing
-5. **Return Values**: Return structured data that's easy for the agent to understand
+1. **ツールの命名**: ツールには明確でわかりやすい名前を使用する
+2. **ドキュメント**: ツールが何をするか、そのパラメータについて詳細な説明を提供する
+3. **エラーハンドリング**: ツールに適切なエラーハンドリングを含める
+4. **パラメータ検証**: 処理前に入力を検証する
+5. **戻り値**: エージェントが理解しやすい構造化されたデータを返す
 
-## Examples
+## 例
 
-Check out the example notebooks in this directory:
-- [Using MCP Tools](01-using-mcp-tools/mcp-agent.ipynb): Learn how to integrate MCP tools with your agent
-- [Custom Tools](02-custom-tools/custom-tools-with-strands-agents.ipynb): Learn how to create and use custom tools
+このディレクトリのサンプルノートブックを確認してください：
+- [MCP ツールの使用](01-using-mcp-tools/mcp-agent.ipynb): エージェントで MCP ツールを統合する方法を学ぶ
+- [カスタムツール](02-custom-tools/custom-tools-with-strands-agents.ipynb): カスタムツールを作成して使用する方法を学ぶ
 
-For more details, see the [Strands tools documentation](https://strandsagents.com/0.1.x/user-guide/concepts/tools/python-tools/).
+詳細については、[Strands ツールドキュメント](https://strandsagents.com/0.1.x/user-guide/concepts/tools/python-tools/)を参照してください。
+```
